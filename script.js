@@ -1,30 +1,60 @@
-
-
+console.log("javascript loaded")
+// Grab the HTML elements and convert to Javascript variables
 var timeBlock = document.querySelector(".input-group");
-var save = document.querySelector(".fa fa-save");
+var saveEntry = document.querySelector(".fa-save");
 
-timeblock.addEventListener("click", function () {
-});
+var plan = JSON.parse(localStorage.getItem("plan"))  // store key and a string
+if (!plan) {
+    plan = {}
+}
 
-save.addEventListener("click", function () {
-});
 
 
+function showInfo() {
+
+    for (key in plan) {
+        console.log(key, plan[key])
+        $("#" + key).val(plan[key])   // $("#msg8")
+    }
+}
+
+
+$(".input-group-addon").on("click", function () {
+    console.log("click the whole button")
+
+    event.preventDefault();
+    console.log("clicked")
+    var input = $(this).siblings(".form-control").val()
+    var hour = $(this).siblings(".form-control").attr("id")
+    console.log(input, hour)
+
+    // save on localstorage
+    plan[hour] = input
+    console.log(plan)
+    localStorage.setItem("plan", JSON.stringify(plan))
+
+})
+
+// change the colors of the input area based on the current time
+function showColor() {
+    // get the current time  // use moment
+    var current = moment().format("dddd, MMMM Do")
+    $("#currentDay").text(current)
+    var hour = moment().hours()
+
+    //
+}
+
+//create function to save content
 function timeBlock(type, message) {
     msgDiv.textContent = message;
     msgDiv.setAttribute("class", type);
 }
 
-signUpButton.addEventListener("click", function (event) {
-    event.preventDefault();
 
-    // set new submission
-    localStorage.setItem("user", JSON.stringify(timeBlock));
 
-    // get most recent submission
-    var lastUser = JSON.parse(localStorage.getItem("timeBlock"));
-    userFirstNameSpan.textContent = lastUser.firstName;
-    userLastNameSpan.textContent = lastUser.lastName;
-    userEmailSpan.textContent = lastUser.email;
-    userPasswordSpan.textContent = lastUser.password;
-}
+
+showInfo()
+showColor()
+
+
