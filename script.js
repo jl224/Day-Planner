@@ -23,8 +23,8 @@ $(".input-group-addon").on("click", function () {
 
     event.preventDefault();
     console.log("clicked")
-    var input = $(this).siblings(".form-Control").val()
-    var hour = $(this).siblings(".form-Control").attr("id")
+    var input = $(this).siblings(".form-control").val()
+    var hour = $(this).siblings(".form-control").attr("id")
     console.log(input, hour)
 
     // save on localstorage
@@ -43,7 +43,7 @@ function showColor() {
     console.log("current hour", hour)
 
     //  msg8  past present future
-    $(".form-Control").each(function () {
+    $(".form-control").each(function () {
         var id = $(this).attr("id")
         var time = parseInt(id.slice(3))
         console.log("time", time)
